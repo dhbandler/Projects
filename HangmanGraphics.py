@@ -36,18 +36,19 @@ def pickWord():  #Selects the word
     else:
         word = "carthagex"
         return word
-        
+      
 def charact(): #Prints lines under letters for guess
     charcount = len(word)
-    z = 50
+    z = 350
     for i in range(1,charcount+1):
-        Sprite(wordunderline, (z, 100))
-        z += 75
-        
-      
-def keyPress(abcdefghijklmnopqrstuvwxyz):
-    if keyPress(abcdefghijklmnopqrstuvwxyz) in word:  #Deals with what happens when you get it right
-        text = TextAsset(i, fill=black,style= "bold 30pt Georgia")
+        Sprite(wordunderline, (z, 450))
+        z += 25
+     
+     
+def keyPress(event):
+    
+    if event.key in word:  #Deals with what happens when you get it right
+        text = TextAsset(event.key, fill=black,style= "bold 30pt Georgia")
         Sprite(text)
         data["correct guesses"] += 1
         
@@ -64,10 +65,10 @@ def keyPress(abcdefghijklmnopqrstuvwxyz):
         elif data["incorrect guesses"] == 4:
             Sprite(limbs, (245,295)) 
         elif data["incorrect guesses"] == 5:
-            Sprite(blackLine, (228, 160))
+            Sprite(blackLine, (230, 220))
         elif data["incorrect guesses"] == 6:
-            Sprite(blackLine2, (233, 225))
-            Sprite((TextAsset("you died", fill=black,style= "bold 40pt Georgia")), 200, 200)
+            Sprite(blackLine2, (190, 220))
+            Sprite((TextAsset("you died", fill=black,style= "bold 100pt Georgia")), (300, 200))
     
    
 
@@ -98,8 +99,8 @@ if __name__ == '__main__':
     head = CircleAsset(40,blackOutline,white)
     body = RectangleAsset(5,75, blackOutline, white)
     limbs = RectangleAsset(5,50, blackOutline, white)
-    blackLine = LineAsset(0,0, blackOutline)
-    blackLine2 = LineAsset(50,50, blackOutline)
+    blackLine = LineAsset(50,50, blackOutline)
+    blackLine2 = LineAsset(-50,50, blackOutline)
     wordunderline = RectangleAsset(15,5, blackOutline, black)
     
 
@@ -114,6 +115,8 @@ if __name__ == '__main__':
     #Keyboard input:
     
     word = pickWord()
+    
+    charact()
     
     for i in str("abcdefghijklmnopqrstuvwxyz"):
         App().listenKeyEvent("keydown", i, keyPress)
