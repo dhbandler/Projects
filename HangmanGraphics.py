@@ -7,34 +7,34 @@ from random import randint
 def pickWord():  #Selects the word
     num = randint(1,10)
     if num == 1:
-        word = "happiness"
+        word = "happinessx"
         return word
     elif num == 2:
-        word = "mechanized"
+        word = "mechanizedx"
         return word
     elif num == 3:
-        word = "wedding"
+        word = "weddingx"
         return word
     elif num == 4:
-        word = "airport"
+        word = "airportx"
         return word
     elif num == 5:
-        word = "realpolitik"
+        word = "realpolitikx"
         return word
     elif num == 6:
-        word = "beelzebub"
+        word = "beelzebubx"
         return word
     elif num == 7:
-        word = "conquest"
+        word = "fraternalx"
         return word
     elif num == 8:
-        word = "schadenfreude"
+        word = "schadenfreudex"
         return word
     elif num == 9:
-        word = "intelligentsia"
+        word = "intelligentsiax"
         return word
     else:
-        word = "carthage"
+        word = "carthagex"
         return word
         
 def charact(): #Prints lines under letters for guess
@@ -46,12 +46,13 @@ def charact(): #Prints lines under letters for guess
         
       
 def keyPress(abcdefghijklmnopqrstuvwxyz):
-    if i in word:
+    if keyPress(abcdefghijklmnopqrstuvwxyz) in word:  #Deals with what happens when you get it right
         text = TextAsset(i, fill=black,style= "bold 30pt Georgia")
         Sprite(text)
         data["correct guesses"] += 1
-    else:
-        text = TextAsset(i, fill=red,style= "bold 30pt Georgia")
+        
+    else:   #Deals with the "What if?"'s of getting it wrong
+        text = TextAsset(i, fill=black,style= "bold 30pt Georgia")
         Sprite(text)
         data["incorrect guesses"] += 1 
         if data["incorrect guesses"] == 1:
@@ -66,12 +67,13 @@ def keyPress(abcdefghijklmnopqrstuvwxyz):
             Sprite(blackLine, (228, 160))
         elif data["incorrect guesses"] == 6:
             Sprite(blackLine2, (233, 225))
-            Sprite((TextAsset("you died", fill=red,style= "bold 40pt Georgia")), 200, 200)
+            Sprite((TextAsset("you died", fill=black,style= "bold 40pt Georgia")), 200, 200)
     
    
 
 if __name__ == '__main__':
-    data = {}
+    
+    data = {}  #These are for storing number of correct and incorrect guesses
     data["incorrect guesses"] = 0
     data["correct guesses"] = 0
 
@@ -109,7 +111,9 @@ if __name__ == '__main__':
     Sprite(rope2, (228,150))
     Sprite(ropespace, (231, 153))
     
+    #Keyboard input:
     
+    word = pickWord()
     
     for i in str("abcdefghijklmnopqrstuvwxyz"):
         App().listenKeyEvent("keydown", i, keyPress)
