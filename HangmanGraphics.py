@@ -43,19 +43,30 @@ def charact(): #Prints lines under letters for guess
     for i in range(1,charcount+1):
         Sprite(wordunderline, (z, 450))
         z += 25
-     
-     
+"""        
+def wordComplete():
+    if ch in word
+"""     
 def keyPress(event):
     
     if event.key in word:  #Deals with what happens when you get it right
         text = TextAsset(event.key, fill=black,style= "bold 30pt Georgia")
-        Sprite(text)
-        data["correct guesses"] += 1
+        for ch in word:
+            z = 350
+            while ch == event.key:
+                Sprite(text, (z,450))
+            
+        
         
     else:   #Deals with the "What if?"'s of getting it wrong
         text = TextAsset(i, fill=black,style= "bold 30pt Georgia")
-        Sprite(text)
-        data["incorrect guesses"] += 1 
+        
+        z=350
+        while data["incorrect guesses"] <= 6:
+            Sprite(text, (z,250))
+            z += 40
+            data["incorrect guesses"] += 1 
+        
         if data["incorrect guesses"] == 1:
             Sprite(head, (200,140))
         elif data["incorrect guesses"] == 2:
@@ -118,7 +129,7 @@ if __name__ == '__main__':
     
     charact()
     
-    for i in str("abcdefghijklmnopqrstuvwxyz"):
+    for i in str("abcdefghijklmnopqrstuvwxyz"):  #listens for event
         App().listenKeyEvent("keydown", i, keyPress)
         
         
