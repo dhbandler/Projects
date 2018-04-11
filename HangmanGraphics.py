@@ -51,11 +51,9 @@ def keyPress(event):
     
     if event.key in word:  #Deals with what happens when you get it right
         text = TextAsset(event.key, fill=black,style= "bold 30pt Georgia")
+        z=350
         for ch in word:
-            z = 350
-            while ch == event.key:
-                Sprite(text, (z,450))
-            
+            Sprite(text, (z,450))
         
         
     else:   #Deals with the "What if?"'s of getting it wrong
