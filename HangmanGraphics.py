@@ -62,13 +62,13 @@ def wordComplete():
 def keyPress(event):
     text = TextAsset(event.key, fill=black,style= "bold 30pt Georgia")
     
-    
+
     
         
 
     Sprite(text, (data["guessed boxx"],data["guessed boxy"]))
     data["guessed boxx"] += 40
-    if data["guessed boxx"] == 700:
+    if data["guessed boxx"] >= 900:
         data["guessed boxy"] += 40
         data["guessed boxx"] = 450
     
