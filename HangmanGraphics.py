@@ -11,7 +11,7 @@ def pickWord():  #Selects the word
         word = "happiness"
         return word
     elif num == 2:
-        word = "mechanized"
+        word = "immortal"
         return word
     elif num == 3:
         word = "perestroika"
@@ -46,59 +46,52 @@ def charact(): #Prints lines under letters for guess
         z += 25
         
 
-def wordComplete():
-    if event.key in data["word"]:
-        data["word"] -= ch
-        if data["word"] == 0:
-            return True
-            Sprite((TextAsset("YOU WIN!!!!", fill=black,style= "bold 100pt Georgia")), (300, 200))
-        else:
-            return False
-    else:
-        return False
-           
-                
-   
 def keyPress(event):
-    text = TextAsset(event.key, fill=black,style= "bold 30pt Georgia")
-    
-
+    if data["gameOver"] == False:
+        if event.key not in data["lettersGuessed"]:
+            text = TextAsset(event.key, fill=black,style= "bold 30pt Georgia")
+            Sprite(text, (data["guessed boxx"],data["guessed boxy"]))
+            data["guessed boxx"] += 40
+            if data["guessed boxx"] >= 900:
+                data["guessed boxy"] += 40
+                data["guessed boxx"] = 450
+        
+            data["lettersGuessed"] + event.key
+      
+            for ch in data["word"]:  #Finishes game if you get it correct
+                if ch in data["lettersGuessed"]:
+                    Sprite((TextAsset("YOU SAVED THE CONVICTED MURDERER!!", fill=black,style= "bold 100pt Georgia")), (150, 100))
+                    data["gameOver"] = True
+            
     
         
-
-    Sprite(text, (data["guessed boxx"],data["guessed boxy"]))
-    data["guessed boxx"] += 40
-    if data["guessed boxx"] >= 900:
-        data["guessed boxy"] += 40
-        data["guessed boxx"] = 450
-    
-
-    z = 350
-    for ch in data["word"]:
-        if ch == event.key:
-            Sprite(TextAsset(event.key, fill=black,style= "bold 30pt Georgia"), (z, 410))
-        z += 25
+            z = 350 #Sprites letters if correct
+            for ch in data["word"]:
+                if ch == event.key:
+                    Sprite(TextAsset(event.key, fill=black,style= "bold 30pt Georgia"), (z, 410))
+                z += 25
                 
         
         
-    if event.key not in data["word"]:   #Deals with the "What if?"'s of getting it wrong
+            if event.key not in data["word"]:   #Deals with the "What if?"'s of getting it wrong
         
-        data["incorrect guesses"] += 1 
+                data["incorrect guesses"] += 1 
     
-        if data["incorrect guesses"] == 1:
-            Sprite(head, (200,140))
-        elif data["incorrect guesses"] == 2:
-            Sprite(body, (235,220))
-        elif data["incorrect guesses"] == 3:
-            Sprite(limbs, (225,295))
-        elif data["incorrect guesses"] == 4:
-            Sprite(limbs, (245,295)) 
-        elif data["incorrect guesses"] == 5:
-            Sprite(blackLine, (230, 220))
-        elif data["incorrect guesses"] == 6:
-            Sprite(blackLine2, (190, 220))
-            Sprite((TextAsset("YOU DIED!!", fill=red,style= "bold 100pt Georgia")), (150, 100))
-            
+                if data["incorrect guesses"] == 1:
+                    Sprite(head, (200,140))
+                elif data["incorrect guesses"] == 2:
+                    Sprite(body, (235,220))
+                elif data["incorrect guesses"] == 3:
+                    Sprite(limbs, (225,295))
+                elif data["incorrect guesses"] == 4:
+                    Sprite(limbs, (245,295)) 
+                elif data["incorrect guesses"] == 5:
+                    Sprite(blackLine, (230, 220))
+                elif data["incorrect guesses"] == 6:
+                    Sprite(blackLine2, (190, 220))
+                    Sprite((TextAsset("YOU DIED!!", fill=red,style= "bold 100pt Georgia")), (150, 100))
+                    data["gameOver"] = True
+        
     
    
 
@@ -108,7 +101,9 @@ if __name__ == '__main__':
     data["incorrect guesses"] = 0
     data["guessed boxx"] = 450
     data["guessed boxy"] = 250
-
+    data["word"] = pickWord()
+    data["gameOver"] = False
+    data["lettersGuessed"] = str()
 
 
     #Colors:
@@ -146,11 +141,7 @@ if __name__ == '__main__':
     Sprite(ropespace, (231, 153))
     
     #Keyboard input:
-    
-    data["word"] = pickWord()
-    
 
-    
     charact()
     
     for i in str("abcdefghijklmnopqrstuvwxyz"):  #listens for event
