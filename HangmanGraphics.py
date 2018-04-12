@@ -6,65 +6,85 @@ from random import randint
 
 def pickWord():  #Selects the word
     num = randint(1,10)
+
     if num == 1:
-        word = "happinessx"
+        word = "happiness"
         return word
     elif num == 2:
-        word = "mechanizedx"
+        word = "mechanized"
         return word
     elif num == 3:
-        word = "weddingx"
+        word = "perestroika"
         return word
     elif num == 4:
-        word = "airportx"
+        word = "airport"
         return word
     elif num == 5:
-        word = "realpolitikx"
+        word = "realpolitik"
         return word
     elif num == 6:
-        word = "beelzebubx"
+        word = "beelzebub"
         return word
     elif num == 7:
-        word = "fraternalx"
+        word = "fraternal"
         return word
     elif num == 8:
-        word = "schadenfreudex"
+        word = "schadenfreude"
         return word
     elif num == 9:
-        word = "intelligentsiax"
+        word = "intelligentsia"
         return word
     else:
-        word = "carthagex"
+        word = "carthage"
         return word
       
 def charact(): #Prints lines under letters for guess
-    charcount = len(word)
+    charcount = len(data["word"])
     z = 350
     for i in range(1,charcount+1):
         Sprite(wordunderline, (z, 450))
         z += 25
-"""        
+        
+
 def wordComplete():
-    if ch in word
-"""     
+    if event.key in data["word"]:
+        data["word"] -= ch
+        if data["word"] == 0:
+            return True
+            Sprite((TextAsset("YOU WIN!!!!", fill=black,style= "bold 100pt Georgia")), (300, 200))
+        else:
+            return False
+    else:
+        return False
+           
+                
+   
 def keyPress(event):
+    text = TextAsset(event.key, fill=black,style= "bold 30pt Georgia")
     
-    if event.key in word:  #Deals with what happens when you get it right
-        text = TextAsset(event.key, fill=black,style= "bold 30pt Georgia")
-        z=350
-        for ch in word:
-            Sprite(text, (z,450))
+    
+    
+        
+
+    Sprite(text, (data["guessed boxx"],data["guessed boxy"]))
+    data["guessed boxx"] += 40
+    if data["guessed boxx"] == 700:
+        data["guessed boxy"] += 40
+        data["guessed boxx"] = 450
+    
+
+    z = 350
+    for ch in data["word"]:
+        if ch == event.key:
+            Sprite(TextAsset(event.key, fill=black,style= "bold 30pt Georgia"), (z, 410))
+        z += 25
+                
         
         
-    else:   #Deals with the "What if?"'s of getting it wrong
-        text = TextAsset(i, fill=black,style= "bold 30pt Georgia")
+    if event.key not in data["word"]:   #Deals with the "What if?"'s of getting it wrong
         
-        z=350
-        while data["incorrect guesses"] <= 6:
-            Sprite(text, (z,250))
-            z += 40
-            data["incorrect guesses"] += 1 
-        
+        data["incorrect guesses"] += 1 
+    
         if data["incorrect guesses"] == 1:
             Sprite(head, (200,140))
         elif data["incorrect guesses"] == 2:
@@ -77,7 +97,8 @@ def keyPress(event):
             Sprite(blackLine, (230, 220))
         elif data["incorrect guesses"] == 6:
             Sprite(blackLine2, (190, 220))
-            Sprite((TextAsset("you died", fill=black,style= "bold 100pt Georgia")), (300, 200))
+            Sprite((TextAsset("YOU DIED!!", fill=red,style= "bold 100pt Georgia")), (150, 100))
+            
     
    
 
@@ -85,7 +106,9 @@ if __name__ == '__main__':
     
     data = {}  #These are for storing number of correct and incorrect guesses
     data["incorrect guesses"] = 0
-    data["correct guesses"] = 0
+    data["guessed boxx"] = 450
+    data["guessed boxy"] = 250
+
 
 
     #Colors:
@@ -93,6 +116,7 @@ if __name__ == '__main__':
     white = Color(0xFFFFFF,1) #color white
     woodbrown = Color(0x8B4513,1) #Color brown
     lightbrown = Color(0xD2691E,1)#light brown
+    red = Color(0xFF0000,1) #red
 
 
     blackOutline = LineStyle(5,black) #Outline
@@ -123,7 +147,9 @@ if __name__ == '__main__':
     
     #Keyboard input:
     
-    word = pickWord()
+    data["word"] = pickWord()
+    
+
     
     charact()
     
