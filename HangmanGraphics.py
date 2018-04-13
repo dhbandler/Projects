@@ -5,7 +5,7 @@ from ggame import *
 from random import randint
 
 def pickWord():  #Selects the word
-    num = randint(1,10)
+    num = randint(1,15)
 
     if num == 1:
         word = "happiness"
@@ -33,6 +33,21 @@ def pickWord():  #Selects the word
         return word
     elif num == 9:
         word = "intelligentsia"
+        return word
+    elif num == 10:
+        word = "incendiary"
+        return word
+    elif num == 11:
+        word = "dachshund"
+        return word
+    elif num == 12:
+        word = "petroleum"
+        return word
+    elif num == 13:
+        word = "hotdog"
+        return word
+    elif num == 14:
+        word = "dermatoglyphics"
         return word
     else:
         word = "carthage"
