@@ -45,7 +45,18 @@ def charact(): #Prints lines under letters for guess
         Sprite(wordunderline, (z, 450))
         z += 25
         
-
+"""        
+def wordComplete():
+    for ch not in data["word"]:  #Finishes game if you get it correct
+                if ch in data["lettersGuessed"]:
+                    Sprite((TextAsset("YOU SAVED THE CONVICTED MURDERER!!", fill=black,style= "bold 100pt Georgia")), (150, 100))
+                    data["gameOver"] = False
+                    return False
+                else:
+                    data["gameOver"] = True
+                    return True
+        
+"""
 def keyPress(event):
     if data["gameOver"] == False:
         if event.key not in data["lettersGuessed"]:
@@ -56,7 +67,7 @@ def keyPress(event):
                 data["guessed boxy"] += 40
                 data["guessed boxx"] = 450
         
-            data["lettersGuessed"] + event.key
+            data["lettersGuessed"] += event.key
       
             for ch in data["word"]:  #Finishes game if you get it correct
                 if ch in data["lettersGuessed"]:
