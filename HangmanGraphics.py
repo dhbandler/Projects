@@ -11,7 +11,7 @@ def pickWord():  #Selects the word
         word = "happiness"
         return word
     elif num == 2:
-        word = "immortal"
+        word = "purgatory"
         return word
     elif num == 3:
         word = "perestroika"
@@ -45,18 +45,16 @@ def charact(): #Prints lines under letters for guess
         Sprite(wordunderline, (z, 450))
         z += 25
         
-"""        
+      
 def wordComplete():
-    for ch not in data["word"]:  #Finishes game if you get it correct
-                if ch in data["lettersGuessed"]:
-                    Sprite((TextAsset("YOU SAVED THE CONVICTED MURDERER!!", fill=black,style= "bold 100pt Georgia")), (150, 100))
+    for ch in data["word"]:  #Finishes game if you get it correct
+                if ch not in data["lettersGuessed"]:
                     data["gameOver"] = False
                     return False
-                else:
-                    data["gameOver"] = True
-                    return True
+    data["gameOver"] = True
+    return True
         
-"""
+
 def keyPress(event):
     if data["gameOver"] == False:
         if event.key not in data["lettersGuessed"]:
@@ -68,13 +66,9 @@ def keyPress(event):
                 data["guessed boxx"] = 450
         
             data["lettersGuessed"] += event.key
-      
-            for ch in data["word"]:  #Finishes game if you get it correct
-                if ch in data["lettersGuessed"]:
-                    Sprite((TextAsset("YOU SAVED THE CONVICTED MURDERER!!", fill=black,style= "bold 100pt Georgia")), (150, 100))
-                    data["gameOver"] = True
-            
-    
+
+            if wordComplete():
+                 Sprite((TextAsset("YOU SAVED THE CONVICTED MURDERER!!", fill=green,style= "bold 75pt Georgia")), (75, 50))
         
             z = 350 #Sprites letters if correct
             for ch in data["word"]:
@@ -123,6 +117,7 @@ if __name__ == '__main__':
     woodbrown = Color(0x8B4513,1) #Color brown
     lightbrown = Color(0xD2691E,1)#light brown
     red = Color(0xFF0000,1) #red
+    green = Color(0x008000,1) #green
 
 
     blackOutline = LineStyle(5,black) #Outline
