@@ -61,8 +61,8 @@ def charact(): #Prints lines under letters for guess
         z += 25
         
       
-def wordComplete():
-    for ch in data["word"]:  #Finishes game if you get it correct
+def wordComplete():  #Finishes game if you get it correct
+    for ch in data["word"]: 
                 if ch not in data["lettersGuessed"]:
                     data["gameOver"] = False
                     return False
@@ -70,7 +70,7 @@ def wordComplete():
     return True
         
 
-def keyPress(event):
+def keyPress(event): #Deals with what happens when you hit a key
     if data["gameOver"] == False:
         if event.key not in data["lettersGuessed"]:
             text = TextAsset(event.key, fill=black,style= "bold 30pt Georgia")
@@ -161,11 +161,11 @@ if __name__ == '__main__':
     Sprite(rope2, (228,150))
     Sprite(ropespace, (231, 153))
     
-    #Keyboard input:
-
-    charact()
+ 
     
-    for i in str("abcdefghijklmnopqrstuvwxyz"):  #listens for event
+    charact() #creates the correct number of underlines for the word
+    
+    for i in str("abcdefghijklmnopqrstuvwxyz"):  #listens for keyboard event
         App().listenKeyEvent("keydown", i, keyPress)
         
         
