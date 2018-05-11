@@ -5,53 +5,10 @@ from ggame import *
 from random import randint
 
 def pickWord():  #Selects the word
-    num = randint(1,15)
-
-    if num == 1:
-        word = "happiness"
-        return word
-    elif num == 2:
-        word = "purgatory"
-        return word
-    elif num == 3:
-        word = "perestroika"
-        return word
-    elif num == 4:
-        word = "airport"
-        return word
-    elif num == 5:
-        word = "realpolitik"
-        return word
-    elif num == 6:
-        word = "beelzebub"
-        return word
-    elif num == 7:
-        word = "fraternal"
-        return word
-    elif num == 8:
-        word = "schadenfreude"
-        return word
-    elif num == 9:
-        word = "intelligentsia"
-        return word
-    elif num == 10:
-        word = "incendiary"
-        return word
-    elif num == 11:
-        word = "dachshund"
-        return word
-    elif num == 12:
-        word = "petroleum"
-        return word
-    elif num == 13:
-        word = "hotdog"
-        return word
-    elif num == 14:
-        word = "dermatoglyphics"
-        return word
-    else:
-        word = "carthage"
-        return word
+    num = randint(0,1)
+    
+    choices = ["praetor", "purgatory", "perestroika","airport","realpolitik","beelzebub","fraternal","schadenfreude","intelligentsia","incendiary","dachshund","petroleum","electroencephalograph","antidisestablishmentarianism" "carthage"]
+    return choices[num]
       
 def charact(): #Prints lines under letters for guess
     charcount = len(data["word"])
