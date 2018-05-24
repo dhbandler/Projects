@@ -4,26 +4,48 @@
 
 from ggame import *
 
-ROWS = 16
-COLS = 34
-CELL_SIZE = 30
+ROWS = 5
+COLS = 5
+CELL_SIZE = 50
 
-buildBoard = []
+def buildBoard():
+    board = [['a','b','c','d','e'],['f','g','h','i','j'],['k','l','m','n','o'],['p','q','r','s','t'],['u','v','w','x','y']]
+            
+def redrawAll():
+    for i in range(0,5):
+        Sprite(LineAsset(i*COLS,CELL_SIZE*ROWS, LineStyle(1,black)),(i*COLS, 0))
+        Sprite(LineAsset(COLS*CELL_SIZE,i*ROWS, LineStyle(1,black)), (0, i*ROWS))
+    #for item in App().spritelist[:]:
+        #item.destroy()
 
-
-if __name__== "__main__":
+def mouseClick(event):
+    totalClicks == 1
+    if totalClicks < 3:
+        Sprite(shipbox, (mouseClick.x,mouseClick.y))
     
-    blue = Color(0x3383FF,1)
-    chrome = Color(0xdbe4eb,1)
-    black = Color(0x000000,1)
-    
-    seaBox = RectangleAsset(CELL_SIZE*COLS,CELL_SIZE*ROWS,LineStyle(1,blue),blue)
-    shipBox = RectangleAsset(CELL_SIZE,CELL_SIZE,LineStyle(1,black),chrome)
-    line = LineAsset(1*COLS,CELL_SIZE*ROWS, LineStyle(1,black))
+def pickComputerShips():
+
+#def computerTurn():
+
     
 
-    Sprite(seaBox)
-    Sprite(line)
-    Sprite(shipBox)
-    App().run()
+
+    if __name__== "__main__":
+    
+        totalClicks = 0
+    
+        blue = Color(0x3383FF,1)
+        chrome = Color(0xdbe4eb,1)
+        black = Color(0x000000,1)
+    
+        seaBox = RectangleAsset(CELL_SIZE*COLS,CELL_SIZE*ROWS,LineStyle(1,blue),blue)
+        shipBox = RectangleAsset(CELL_SIZE,CELL_SIZE,LineStyle(1,black),chrome)
+
+
+    
+        redrawAll()
+    
+        #App.listenMouseEvent("click", mouseClick)
+    
+        App().run()
     
