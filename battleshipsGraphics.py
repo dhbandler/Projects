@@ -10,13 +10,23 @@ CELL_SIZE = 50
 
 def buildBoard():
     board = [['a','b','c','d','e'],['f','g','h','i','j'],['k','l','m','n','o'],['p','q','r','s','t'],['u','v','w','x','y']]
-            
+    return board 
+    
 def redrawAll():
+    for item in App().spritelist[:]:
+        item.destroy()
+    Sprite(seabox)
+    
+    
+    for i in range(5):
+        for j in range(5):
+            Sprite(LineAsset(i*CELL_SIZE,CELL_SIZE*ROWS, LineStyle(1,black)),(i*COLS, 0))
+            Sprite(LineAsset(COLS*CELL_SIZE,i*CELL_SIZE, LineStyle(1,black)), (0, i*ROWS)) 
+    """
     for i in range(0,5):
-        Sprite(LineAsset(i*COLS,CELL_SIZE*ROWS, LineStyle(1,black)),(i*COLS, 0))
-        Sprite(LineAsset(COLS*CELL_SIZE,i*ROWS, LineStyle(1,black)), (0, i*ROWS))
-    #for item in App().spritelist[:]:
-        #item.destroy()
+        Sprite(LineAsset(i*CELL_SIZE,CELL_SIZE*ROWS, LineStyle(1,black)),(i*COLS, 0))
+        Sprite(LineAsset(COLS*CELL_SIZE,i*CELL_SIZE, LineStyle(1,black)), (0, i*ROWS))
+    """
 
 def mouseClick(event):
     totalClicks == 1
@@ -40,7 +50,6 @@ def pickComputerShips():
     
         seaBox = RectangleAsset(CELL_SIZE*COLS,CELL_SIZE*ROWS,LineStyle(1,blue),blue)
         shipBox = RectangleAsset(CELL_SIZE,CELL_SIZE,LineStyle(1,black),chrome)
-
 
     
         redrawAll()
