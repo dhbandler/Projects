@@ -3,10 +3,11 @@
 #battleshipsGame.py
 
 from ggame import *
+from random import randint
 
 ROWS = 5
 COLS = 5
-CELL_SIZE = 50
+CELL_SIZE = 100
 
 def buildBoard():
     board = [['a','b','c','d','e'],['f','g','h','i','j'],['k','l','m','n','o'],['p','q','r','s','t'],['u','v','w','x','y']]
@@ -15,18 +16,12 @@ def buildBoard():
 def redrawAll():
     for item in App().spritelist[:]:
         item.destroy()
-    Sprite(seabox)
-    
     
     for i in range(5):
         for j in range(5):
-            Sprite(LineAsset(i*CELL_SIZE,CELL_SIZE*ROWS, LineStyle(1,black)),(i*COLS, 0))
-            Sprite(LineAsset(COLS*CELL_SIZE,i*CELL_SIZE, LineStyle(1,black)), (0, i*ROWS)) 
-    """
-    for i in range(0,5):
-        Sprite(LineAsset(i*CELL_SIZE,CELL_SIZE*ROWS, LineStyle(1,black)),(i*COLS, 0))
-        Sprite(LineAsset(COLS*CELL_SIZE,i*CELL_SIZE, LineStyle(1,black)), (0, i*ROWS))
-    """
+            Sprite(RectangleAsset(CELL_SIZE,CELL_SIZE,LineStyle(3,black),blue),(i*CELL_SIZE, j*CELL_SIZE))
+
+
 
 def mouseClick(event):
     totalClicks == 1
@@ -34,27 +29,35 @@ def mouseClick(event):
         Sprite(shipbox, (mouseClick.x,mouseClick.y))
     
 def pickComputerShips():
-
-#def computerTurn():
-
+    i = 0
+    while i <= 3:
+        rand1 = randint(1,5)
+        rand2 = randint(1,5)
+        Sprite(shipbox,(board[rand1-1][rand2-1]))
+        i += 1
     
 
-
-    if __name__== "__main__":
-    
-        totalClicks = 0
-    
-        blue = Color(0x3383FF,1)
-        chrome = Color(0xdbe4eb,1)
-        black = Color(0x000000,1)
-    
-        seaBox = RectangleAsset(CELL_SIZE*COLS,CELL_SIZE*ROWS,LineStyle(1,blue),blue)
-        shipBox = RectangleAsset(CELL_SIZE,CELL_SIZE,LineStyle(1,black),chrome)
+def computerTurn():
 
     
-        redrawAll()
+
+
+if __name__== "__main__":
+
+    totalClicks = 0
+
+    blue = Color(0x3383FF,1)
+    chrome = Color(0xdbe4eb,1)
+    black = Color(0x000000,1)
+
+
+    shipBox = RectangleAsset(CELL_SIZE,CELL_SIZE,LineStyle(1,black),chrome)
+
+
+    redrawAll()
     
-        #App.listenMouseEvent("click", mouseClick)
-    
-        App().run()
-    
+    pickComputerShips()
+
+    #App.listenMouseEvent("click", mouseClick)
+
+    App().run()
