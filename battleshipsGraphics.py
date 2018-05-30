@@ -38,19 +38,19 @@ def pickComputerShips():
     while i <= 3:
         rand1 = randint(1,5)
         rand2 = randint(1,5)
-        print(board[rand1][rand2])
+        print(data["board"][rand1][rand2])
         i += 1
  
-
+"""
 def computerTurn():
     cord1 = randint(1,5)
     cord2 = randint(1,5)
-    guess = board[cord1][cord2]
+    if cord
     
     if THEIRSINK >= 3:
         Sprite((TextAsset("YOU WIN!!", fill=green,style= "bold 75pt Georgia")), (75, 50))
         
-    
+"""    
     
 
 
@@ -74,7 +74,6 @@ if __name__== "__main__":
     black = Color(0x000000,1)
     green = Color(0x008000,1)
     red = Color(0xFF0000,1)
-
 
     shipbox = RectangleAsset(CELL_SIZE,CELL_SIZE,LineStyle(3,black),chrome)
 
