@@ -17,6 +17,9 @@ def redrawAll():
     for item in App().spritelist[:]:
         item.destroy()
     
+    #for i in data["board"]:
+        #if data["board"] == ship:
+            #Sprite(shipbox,(
     for i in range(5):
         for j in range(5):
             Sprite(RectangleAsset(CELL_SIZE,CELL_SIZE,LineStyle(3,black),blue),(i*CELL_SIZE, j*CELL_SIZE))
@@ -25,10 +28,15 @@ def redrawAll():
             
 
 def mouseClick(event):
-    totalClicks == 1
+    print(event.x//90,event.y//90)
+    totalClicks += 1
+    
     if totalClicks < 3:
-        Sprite(shipbox, (mouseClick.x,mouseClick.y))
-        #myShips.append(#corresponding letter in data["board"])
+        data["board"][event.x//90][event.y//90] = "ship"
+        redrawAll()
+    elif totalClicks >= 3:
+        
+
     if SINK >= 3:
         Sprite((TextAsset("YOU LOOOOSSSEEEE!!!!!!", fill=red,style= "bold 75pt Georgia")), (75, 50))
         
@@ -73,7 +81,8 @@ if __name__== "__main__":
     
     GuessedComp = []
 
-    myShips = []
+    totalclicks = 0
+    
     ComputerShips = []
     
     data = {}
