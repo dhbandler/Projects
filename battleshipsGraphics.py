@@ -20,7 +20,7 @@ def redrawAll():
     for i in range(5):
         for j in range(5):
             Sprite(RectangleAsset(CELL_SIZE,CELL_SIZE,LineStyle(3,black),blue),(i*CELL_SIZE, j*CELL_SIZE))
-            Sprite(RectangleAsset(CELL_SIZE,CELL_SIZE,LineStyle(3,black),blue),(i*CELL_SIZE+300, j*CELL_SIZE+300))
+            Sprite(RectangleAsset(CELL_SIZE,CELL_SIZE,LineStyle(3,black),blue),(i*CELL_SIZE+300, j*CELL_SIZE))
 
             
 
