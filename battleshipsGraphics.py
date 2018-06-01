@@ -51,7 +51,7 @@ def mouseClick(event):
     if SINK >= 3:
         Sprite((TextAsset("YOU LOOOOSSSEEEE!!!!!!", fill=red,style= "bold 75pt Georgia")), (75, 50))
         
-    computerTurn():
+    computerTurn()
 
 def pickComputerShips():
     i = 0
