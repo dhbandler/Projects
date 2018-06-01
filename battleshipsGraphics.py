@@ -40,7 +40,7 @@ def mouseClick(event):
         redrawAll()
         
     totalClicks += 1
-    elif totalClicks >= 3:
+    if totalClicks >= 3:
         if data["comboard"][event.x//90][event.y//90] == "ship":
             data["compboard"][event.x//90][event.y//90] = "sunk"
         else:
