@@ -17,9 +17,9 @@ def redrawAll():
     for item in App().spritelist[:]:
         item.destroy()
     
-    #for i in data["board"]:
-        #if data["board"] == ship:
-            #Sprite(shipbox,(
+    for i in data["board"]:
+        if data["board"] == "ship":
+            Sprite(shipbox)
     for i in range(5):
         for j in range(5):
             Sprite(RectangleAsset(CELL_SIZE,CELL_SIZE,LineStyle(3,black),blue),(i*CELL_SIZE, j*CELL_SIZE))
@@ -29,12 +29,12 @@ def redrawAll():
 
 def mouseClick(event):
     print(event.x//90,event.y//90)
-    totalClicks += 1
     
-    if totalClicks < 3:
+    while totalClicks < 3:
         data["board"][event.x//90][event.y//90] = "ship"
         redrawAll()
-    elif totalClicks >= 3:
+    totalClicks += 1
+    #elif totalClicks >= 3:
         
 
     if SINK >= 3:
@@ -46,23 +46,20 @@ def pickComputerShips():
     while i <= 3:
         rand1 = randint(0,4)
         rand2 = randint(0,4)
-        ComputerShips.append(data["board"][rand1][rand2])
+        data["compboard"][rand1][rand2] = "ship"
         i += 1
 
 
 def computerTurn():
     cord1 = randint(0,4)
     cord2 = randint(0,4)
-    if cord1 and cord2 not in GuessedComp: #This is not working right now, but is supposed to check if the coords have been guessed before
-        GuessedComp.append(cord1,cord2)
-
-    
-        boardLetter = data["board"][cord1][cord2] 
-        if boardLetter in myShips:
-            myShips.remove(boardLetter)
+    if data["board"][cord1][cord2] != "miss" or data["board"][cord1][cord2] != "sunk": 
+        if data["board"] == "ship":
+            data["board"][cord1][cord2] = "sunk"
             SINK += 1
             Sprite(RectangleAsset(CELL_SIZE,CELL_SIZE,LineStyle(3,black),red),((cord1+1)*CELL_SIZE, (cord2+1)*CELL_SIZE))
         else:
+            data["board"][cord1][cord2] = "miss"
             MISS += 1
             Sprite(RectangleAsset(CELL_SIZE,CELL_SIZE,LineStyle(3,black),green),((cord1+1)*CELL_SIZE, (cord2+1)*CELL_SIZE))
         if THEIRSINK >= 3:
@@ -70,7 +67,6 @@ def computerTurn():
         
     
     
-
 
 if __name__== "__main__":
 
@@ -103,7 +99,7 @@ if __name__== "__main__":
     data["compboard"] = buildBoard()
     redrawAll()
     
-    pickComputerShips()
+    #pickComputerShips()
 
     App.listenMouseEvent("click", mouseClick)
 
