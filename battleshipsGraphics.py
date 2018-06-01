@@ -20,6 +20,10 @@ def redrawAll():
     for i in data["board"]:
         if data["board"] == "ship":
             Sprite(shipbox)
+            
+    for i in data["board"]:
+        if data["board"] == "miss":
+            
     for i in range(5):
         for j in range(5):
             Sprite(RectangleAsset(CELL_SIZE,CELL_SIZE,LineStyle(3,black),blue),(i*CELL_SIZE, j*CELL_SIZE))
@@ -34,7 +38,11 @@ def mouseClick(event):
         data["board"][event.x//90][event.y//90] = "ship"
         redrawAll()
     totalClicks += 1
-    #elif totalClicks >= 3:
+    elif totalClicks >= 3:
+        if data["comboard"][event.x//90][event.y//90] == "ship":
+            data["compboard"][event.x//90][event.y//90] = "sunk"
+        else:
+            data["compboard"][event.x//90][event.y//90] = "miss"
         
 
     if SINK >= 3:
@@ -94,6 +102,7 @@ if __name__== "__main__":
     red = Color(0xFF0000,1)
 
     shipbox = RectangleAsset(CELL_SIZE,CELL_SIZE,LineStyle(3,black),chrome)
+    miss
 
     data["board"] = buildBoard()
     data["compboard"] = buildBoard()
