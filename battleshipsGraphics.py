@@ -43,6 +43,7 @@ def mouseClick(event):
     if totalClicks >= 3:
         if data["comboard"][event.x//90][event.y//90] == "ship":
             data["compboard"][event.x//90][event.y//90] = "sunk"
+            THEIRSUNK += 1
         else:
             data["compboard"][event.x//90][event.y//90] = "miss"
         
