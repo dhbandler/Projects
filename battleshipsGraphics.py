@@ -60,6 +60,7 @@ def pickComputerShips():
         rand2 = randint(0,4)
         data["compboard"][rand1][rand2] = "ship"
         i += 1
+    sprite(data["compBoard"])
 
 
 def computerTurn():
