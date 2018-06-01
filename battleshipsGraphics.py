@@ -51,6 +51,7 @@ def mouseClick(event):
     if SINK >= 3:
         Sprite((TextAsset("YOU LOOOOSSSEEEE!!!!!!", fill=red,style= "bold 75pt Georgia")), (75, 50))
         
+    computerTurn():
 
 def pickComputerShips():
     i = 0
@@ -73,8 +74,8 @@ def computerTurn():
             data["board"][cord1][cord2] = "miss"
             MISS += 1
             Sprite(RectangleAsset(CELL_SIZE,CELL_SIZE,LineStyle(3,black),green),((cord1+1)*CELL_SIZE, (cord2+1)*CELL_SIZE))
-        if THEIRSINK >= 3:
-            Sprite((TextAsset("YOU WIN!!", fill=green,style= "bold 75pt Georgia")), (75, 50))
+    if THEIRSINK >= 3:
+        Sprite((TextAsset("YOU WIN!!", fill=green,style= "bold 75pt Georgia")), (75, 50))
         
     
     
@@ -109,7 +110,7 @@ if __name__== "__main__":
 
     data["board"] = buildBoard()
     data["compboard"] = buildBoard()
-    redrawAll()
+
     
     #pickComputerShips()
 
