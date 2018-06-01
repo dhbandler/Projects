@@ -57,7 +57,7 @@ def mouseClick(event):
 
 def pickComputerShips():
     i = 0
-    while i <= 3:
+    while i < 3:
         rand1 = randint(0,4)
         rand2 = randint(0,4)
         data["compboard"][rand1][rand2] = "ship"
@@ -98,8 +98,6 @@ if __name__== "__main__":
     
     data = {}
     
-    THEIRHIT = 0
-    THEIRMISS = 0
     THEIRSINK = 0
 
     blue = Color(0x3383FF,1)
@@ -113,9 +111,12 @@ if __name__== "__main__":
 
     data["board"] = buildBoard()
     data["compboard"] = buildBoard()
+    
 
     pickComputerShips()
-
+    
+    redrawAll()
+    
     App.listenMouseEvent("click", mouseClick)
 
     App().run()
