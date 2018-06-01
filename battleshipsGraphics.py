@@ -35,11 +35,13 @@ def redrawAll():
 def mouseClick(event):
     print(event.x//90,event.y//90)
     
+    totalClicks += 1
+    
     while totalClicks < 3:
         data["board"][event.x//90][event.y//90] = "ship"
         redrawAll()
         
-    totalClicks += 1
+
     if totalClicks >= 3:
         if data["comboard"][event.x//90][event.y//90] == "ship":
             data["compboard"][event.x//90][event.y//90] = "sunk"
@@ -112,8 +114,7 @@ if __name__== "__main__":
     data["board"] = buildBoard()
     data["compboard"] = buildBoard()
 
-    
-    #pickComputerShips()
+    pickComputerShips()
 
     App.listenMouseEvent("click", mouseClick)
 
