@@ -49,13 +49,13 @@ def mouseClick(event):
         
 
     if data["totalClicks"] >= 3:
-        computerTurn()
-        if data["compboard"][(event.x-(90*6))//90][event.y//90] == "ship":
-            data["compboard"][(event.x-(90*6))//90][event.y//90] = "sunk"
-            data["THEIRSUNK"] += 1
-        else:
-            data["compboard"][(event.x-(90*6))//90][event.y//90] = "miss"
-        
+        if data["compboard"] != "sunk" or data["compboard"] != "miss":
+            if data["compboard"][(event.x-(90*6))//90][event.y//90] == "ship":
+                data["compboard"][(event.x-(90*6))//90][event.y//90] = "sunk"
+                data["THEIRSUNK"] += 1
+            else:
+                data["compboard"][(event.x-(90*6))//90][event.y//90] = "miss"
+            computerTurn()       
 
     if data["SUNK"] >= 3:
         Sprite((TextAsset("YOU LOOOOSSSEEEE!!!!!!", fill=red,style= "bold 75pt Georgia")), (75, 50))
