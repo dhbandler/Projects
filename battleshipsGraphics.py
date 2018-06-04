@@ -51,11 +51,11 @@ def mouseClick(event):
     if data["totalClicks"] >= 3:
         computerTurn()
         while 90*11 >= event.x >= 90*6 and 90*5 >= event.y:
-            if data["compboard"][event.x//90-(90*6)][event.y//90] == "ship":
-                data["compboard"][event.x//90-(90*6)][event.y//90] = "sunk"
+            if data["compboard"][(event.x-(90*6))//90][event.y//90] == "ship":
+                data["compboard"][(event.x-(90*6))//90][event.y//90] = "sunk"
                 data["THEIRSUNK"] += 1
             else:
-                data["compboard"][event.x//90-(90*6)][event.y//90] = "miss"
+                data["compboard"][(event.x-(90*6))//90)][event.y//90] = "miss"
         
 
     if data["SUNK"] >= 3:
