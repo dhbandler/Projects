@@ -55,7 +55,7 @@ def mouseClick(event):
                 data["compboard"][(event.x-(90*6))//90][event.y//90] = "sunk"
                 data["THEIRSUNK"] += 1
             else:
-                data["compboard"][(event.x-(90*6))//90)][event.y//90] = "miss"
+                data["compboard"][(event.x-(90*6))//90][event.y//90] = "miss"
         
 
     if data["SUNK"] >= 3:
