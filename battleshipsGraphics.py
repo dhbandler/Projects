@@ -16,44 +16,43 @@ def buildBoard():
 def redrawAll():
     for item in App().spritelist[:]:
         item.destroy()
-    
-    for i in data["board"]:
-        if data["board"] == "ship":
-            Sprite(shipbox)
-            
-    for i in data["board"]:
-        if data["board"] == "miss":
-            Sprite(miss)
-            
+
     for i in range(5):
         for j in range(5):
             Sprite(RectangleAsset(CELL_SIZE,CELL_SIZE,LineStyle(3,black),blue),(i*CELL_SIZE, j*CELL_SIZE))
             Sprite(RectangleAsset(CELL_SIZE,CELL_SIZE,LineStyle(3,black),blue),(i*CELL_SIZE+CELL_SIZE*6, j*CELL_SIZE))
+            if data["board"][i][j] == "ship":
+                Sprite(shipbox,(i*CELL_SIZE,j*CELL_SIZE))
+
+            if data["board"][i][j] == "miss":
+                Sprite(miss,(i*CELL_SIZE,j*CELL_SIZE))
+               
 
             
 
 def mouseClick(event):
     print(event.x//90,event.y//90)
     
-    totalClicks += 1
+
     
-    while totalClicks < 3:
+    if data["totalClicks"] < 3:
         data["board"][event.x//90][event.y//90] = "ship"
         redrawAll()
         
 
-    if totalClicks >= 3:
-        if data["comboard"][event.x//90][event.y//90] == "ship":
+    if data["totalClicks"] >= 3:
+        computerTurn()
+        if data["compboard"][event.x//90][event.y//90] == "ship":
             data["compboard"][event.x//90][event.y//90] = "sunk"
             THEIRSUNK += 1
         else:
             data["compboard"][event.x//90][event.y//90] = "miss"
         
 
-    if SINK >= 3:
+    if data["SUNK"] >= 3:
         Sprite((TextAsset("YOU LOOOOSSSEEEE!!!!!!", fill=red,style= "bold 75pt Georgia")), (75, 50))
-        
-    computerTurn()
+    data["totalClicks"] += 1        
+
 
 def pickComputerShips():
     i = 0
@@ -71,12 +70,12 @@ def computerTurn():
     if data["board"][cord1][cord2] != "miss" or data["board"][cord1][cord2] != "sunk": 
         if data["board"] == "ship":
             data["board"][cord1][cord2] = "sunk"
-            SINK += 1
-            Sprite(RectangleAsset(CELL_SIZE,CELL_SIZE,LineStyle(3,black),red),((cord1+1)*CELL_SIZE, (cord2+1)*CELL_SIZE))
+            data["SUNK"] += 1
+            Sprite(RectangleAsset(CELL_SIZE,CELL_SIZE,LineStyle(3,black),red),((cord1)*CELL_SIZE, (cord2)*CELL_SIZE))
         else:
             data["board"][cord1][cord2] = "miss"
-            MISS += 1
-            Sprite(RectangleAsset(CELL_SIZE,CELL_SIZE,LineStyle(3,black),green),((cord1+1)*CELL_SIZE, (cord2+1)*CELL_SIZE))
+            data["MISS"] += 1
+            Sprite(RectangleAsset(CELL_SIZE,CELL_SIZE,LineStyle(3,black),green),((cord1)*CELL_SIZE, (cord2)*CELL_SIZE))
     if THEIRSINK >= 3:
         Sprite((TextAsset("YOU WIN!!", fill=green,style= "bold 75pt Georgia")), (75, 50))
         
@@ -85,14 +84,17 @@ def computerTurn():
 
 if __name__== "__main__":
 
-    totalClicks = 0
-    MISS = 0
-    SINK = 0
+
     
+    data["board"] = buildBoard()
+    data["compboard"] = buildBoard()
+    data["totalClicks"] = 0
+    data["MISS"] = 0
+    data["SUNK"] = 0
     
     GuessedComp = []
 
-    totalclicks = 0
+
     
     ComputerShips = []
     
@@ -109,9 +111,6 @@ if __name__== "__main__":
     shipbox = RectangleAsset(CELL_SIZE,CELL_SIZE,LineStyle(3,black),chrome)
     miss = RectangleAsset(CELL_SIZE,CELL_SIZE,LineStyle(5,black),green)
 
-    data["board"] = buildBoard()
-    data["compboard"] = buildBoard()
-    
 
     pickComputerShips()
     
