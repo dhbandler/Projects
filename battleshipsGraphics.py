@@ -36,6 +36,14 @@ def redrawAll():
             
             elif data["compboard"][i][j] == "sunk":
                 Sprite(sunk,(i*CELL_SIZE+90*6,j*CELL_SIZE))
+                
+            if data["board"][i][j] == "sunk":
+                Sprite(RectangleAsset(CELL_SIZE,CELL_SIZE,LineStyle(3,black),red),((cord1)*CELL_SIZE, (cord2)*CELL_SIZE))
+            
+            elif data["board"][i][j] == "miss":
+                Sprite(RectangleAsset(CELL_SIZE,CELL_SIZE,LineStyle(3,black),green),((cord1)*CELL_SIZE, (cord2)*CELL_SIZE))
+                
+                
                
 
             
@@ -80,7 +88,7 @@ def computerTurn():
         if data["board"] == "ship":
             data["board"][cord1][cord2] = "sunk"
             data["SUNK"] += 1
-            Sprite(RectangleAsset(CELL_SIZE,CELL_SIZE,LineStyle(3,black),red),((cord1)*CELL_SIZE, (cord2)*CELL_SIZE))
+            
         else:
             data["board"][cord1][cord2] = "miss"
             data["MISS"] += 1
