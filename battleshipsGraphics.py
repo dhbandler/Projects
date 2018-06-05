@@ -52,7 +52,7 @@ def redrawAll(): #handles all of the graphics
 
             
 
-def mouseClick(event):
+def mouseClick(event): #determines what happens when you click
 
     
     if data["totalClicks"] < shipNum: #deals with determining where our ships are
@@ -91,14 +91,17 @@ def pickComputerShips(): #sprites computer ships
 def computerTurn(): #guesses where our ships are.
     cord1 = randint(0,rowcols-1) #random guesses
     cord2 = randint(0,rowcols-1)
-    if data["board"][cord1][cord2] == "miss" or data["board"][cord1][cord2] == "sunk":  #if it has been guessed before, it generates new numbers
-    else:
-        if data["board"][cord1][cord2] == "ship": #verifies if there is a ship there
-            data["board"][cord1][cord2] = "sunk" #sets the ship as sunk
-            data["SUNK"] += 1 #adds to sunk count
+    
+    if data["totalClicks"] > shipNum:
+        if data["board"][cord1][cord2] == "miss" or data["board"][cord1][cord2] == "sunk": #if it has been guessed before, it generates new numbers
+            computerTurn()
+        else:    
+            if data["board"][cord1][cord2] == "ship": #verifies if there is a ship there
+                data["board"][cord1][cord2] = "sunk" #sets the ship as sunk
+                data["SUNK"] += 1 #adds to sunk count
             
-        else:
-            data["board"][cord1][cord2] = "miss" #lets the computer know that it has less a less effective intelligence agency than Lesotho, and can't find targets
+            else:
+                data["board"][cord1][cord2] = "miss" #lets the computer know that it has less a less effective intelligence agency than Lesotho, and can't find targets
             
             
     
