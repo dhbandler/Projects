@@ -47,7 +47,7 @@ def redrawAll(): #handles all of the graphics
                 Sprite((TextAsset("YOU WIN!!", fill=green,style= "bold 75pt Georgia")), (200, 50))
                 
             if data["SUNK"] == shipNum: #ends the game with loss
-                Sprite((TextAsset("YOU LOOOOSSSEEEE!!!!!!", fill=red,style= "bold 75pt Georgia")), (10, 50))
+                Sprite((TextAsset("YOU LOSE!!!!!!", fill=red,style= "bold 75pt Georgia")), (10, 50))
                
 
             
@@ -63,16 +63,17 @@ def mouseClick(event): #determines what happens when you click
         
 
     if data["totalClicks"] >= shipNum: #this part looks at our guesses of where their ships are
-        if data["compboard"] != "sunk" and data["compboard"] != "miss": #checks that we haven't guessed there before
-            if data["compboard"][(event.x-(CELL_SIZE*(rowcols+1)))//CELL_SIZE][event.y//CELL_SIZE] == "ship": #deals with what happens if it is a hit
-                data["totalClicks"] += 1
-                data["compboard"][(event.x-(CELL_SIZE*(rowcols+1)))//CELL_SIZE][event.y//CELL_SIZE] = "sunk" #sinks ship
-                data["THEIRSUNK"] += 1 #adds to theirsunk count
-            else: #deals with what happens if it is a miss
-                data["compboard"][(event.x-(CELL_SIZE*(rowcols+1)))//CELL_SIZE][event.y//CELL_SIZE] = "miss" #goes and sprites miss
-                data["totalClicks"] += 1
-            computerTurn()
-            redrawAll()
+        if data["compboard"] != "sunk" and data["compboard"] != "miss":#checks that we haven't guessed there before
+            if (event.x-(CELL_SIZE*(rowcols+1))//CELL_SIZE) >= CELL_SIZE*rowcols+1:
+                if data["compboard"][(event.x-(CELL_SIZE*(rowcols+1)))//CELL_SIZE][event.y//CELL_SIZE] == "ship": #deals with what happens if it is a hit
+                    data["totalClicks"] += 1
+                    data["compboard"][(event.x-(CELL_SIZE*(rowcols+1)))//CELL_SIZE][event.y//CELL_SIZE] = "sunk" #sinks ship
+                    data["THEIRSUNK"] += 1 #adds to theirsunk count
+                else: #deals with what happens if it is a miss
+                    data["compboard"][(event.x-(CELL_SIZE*(rowcols+1)))//CELL_SIZE][event.y//CELL_SIZE] = "miss" #goes and sprites miss
+                    data["totalClicks"] += 1
+                computerTurn()
+                redrawAll()
             
 
 
