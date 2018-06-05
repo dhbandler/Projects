@@ -11,7 +11,7 @@ shipNum = int(input("Enter the number of subs you want.  ")) #asks for number of
 
 ROWS = rowcols #section stores data for rows, cols cell size, etc
 COLS = rowcols
-CELL_SIZE = ROWS*18
+CELL_SIZE = 200/ROWS+45 #determines cell size
 
 
 def buildBoard(): #builds the matrix used for determinining where ships are and what shots mean
