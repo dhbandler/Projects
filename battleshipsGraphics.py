@@ -43,7 +43,11 @@ def redrawAll():
             elif data["board"][i][j] == "miss":
                 Sprite(RectangleAsset(CELL_SIZE,CELL_SIZE,LineStyle(3,black),green),((cord1)*CELL_SIZE, (cord2)*CELL_SIZE))
                 
+            if data["THEIRSUNK"] >= 3:
+                Sprite((TextAsset("YOU WIN!!", fill=green,style= "bold 75pt Georgia")), (75, 50))
                 
+            elif data["SUNK"] >= 3:
+                Sprite((TextAsset("YOU LOOOOSSSEEEE!!!!!!", fill=red,style= "bold 75pt Georgia")), (75, 50))
                
 
             
@@ -63,10 +67,9 @@ def mouseClick(event):
                 data["THEIRSUNK"] += 1
             else:
                 data["compboard"][(event.x-(90*6))//90][event.y//90] = "miss"
-            computerTurn()       
+            computerTurn()
+            
 
-    if data["SUNK"] >= 3:
-        Sprite((TextAsset("YOU LOOOOSSSEEEE!!!!!!", fill=red,style= "bold 75pt Georgia")), (75, 50))
     data["totalClicks"] += 1        
 
 
@@ -84,7 +87,9 @@ def pickComputerShips():
 def computerTurn():
     cord1 = randint(0,4)
     cord2 = randint(0,4)
-    if data["board"][cord1][cord2] != "miss" or data["board"][cord1][cord2] != "sunk": 
+    if data["board"][cord1][cord2] == "miss" or data["board"][cord1][cord2] == "sunk": 
+        computerTurn()
+    else:
         if data["board"] == "ship":
             data["board"][cord1][cord2] = "sunk"
             data["SUNK"] += 1
@@ -92,10 +97,7 @@ def computerTurn():
         else:
             data["board"][cord1][cord2] = "miss"
             data["MISS"] += 1
-            Sprite(RectangleAsset(CELL_SIZE,CELL_SIZE,LineStyle(3,black),green),((cord1)*CELL_SIZE, (cord2)*CELL_SIZE))
-    if data["THEIRSUNK"] >= 3:
-        Sprite((TextAsset("YOU WIN!!", fill=green,style= "bold 75pt Georgia")), (75, 50))
-        
+            
     
     
 
