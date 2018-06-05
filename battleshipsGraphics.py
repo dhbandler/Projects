@@ -56,15 +56,16 @@ def mouseClick(event): #determines what happens when you click
 
     
     if data["totalClicks"] < shipNum: #deals with determining where our ships are
-        if data["compboard"] != "ship": #prevents placing multiple ships in a square
-            data["board"][event.x//CELL_SIZE][event.y//CELL_SIZE] = "ship" #sets a ship where we clicked
-            redrawAll()
-            data["totalClicks"] += 1
+        if (event.x//CELL_SIZE) <= (CELL_SIZE*rowcols) and event.y//CELL_SIZE <= CELL_SIZE*rowcols:
+            if data["board"][event.x//CELL_SIZE][event.y//CELL_SIZE] != "ship": #prevents placing multiple ships in a square
+                data["board"][event.x//CELL_SIZE][event.y//CELL_SIZE] = "ship" #sets a ship where we clicked
+                redrawAll()
+                data["totalClicks"] += 1
         
 
     if data["totalClicks"] >= shipNum: #this part looks at our guesses of where their ships are
         if data["compboard"] != "sunk" and data["compboard"] != "miss":#checks that we haven't guessed there before
-            if (event.x-(CELL_SIZE*(rowcols+1))//CELL_SIZE) >= CELL_SIZE*rowcols+1:
+            if (event.x-(CELL_SIZE*(rowcols+1))//CELL_SIZE) >= CELL_SIZE*(rowcols+1) and (event.x-(CELL_SIZE*(rowcols+1))//CELL_SIZE) <= CELL_SIZE*((2*rowcols)+1): #makes sure your guess is in the right spot
                 if data["compboard"][(event.x-(CELL_SIZE*(rowcols+1)))//CELL_SIZE][event.y//CELL_SIZE] == "ship": #deals with what happens if it is a hit
                     data["totalClicks"] += 1
                     data["compboard"][(event.x-(CELL_SIZE*(rowcols+1)))//CELL_SIZE][event.y//CELL_SIZE] = "sunk" #sinks ship
