@@ -5,9 +5,13 @@
 from ggame import *
 from random import randint
 
-ROWS = 5
-COLS = 5
-CELL_SIZE = 90
+rowcols = int(input("Enter the number of rows you want.  "))
+shipNum = int(input("Enter the number of subs you want.  "))
+
+ROWS = rowcols
+COLS = rowcols
+CELL_SIZE = ROWS*18
+
 
 def buildBoard():
     return [['a','b','c','d','e'],['f','g','h','i','j'],['k','l','m','n','o'],['p','q','r','s','t'],['u','v','w','x','y']]
@@ -17,8 +21,8 @@ def redrawAll():
     for item in App().spritelist[:]:
         item.destroy()
 
-    for i in range(5):
-        for j in range(5):
+    for i in range(rowcols):
+        for j in range(rowcols):
             Sprite(RectangleAsset(CELL_SIZE,CELL_SIZE,LineStyle(3,black),blue),(i*CELL_SIZE, j*CELL_SIZE))
             Sprite(RectangleAsset(CELL_SIZE,CELL_SIZE,LineStyle(3,black),blue),(i*CELL_SIZE+CELL_SIZE*6, j*CELL_SIZE))
             
@@ -32,22 +36,16 @@ def redrawAll():
                 Sprite(miss,(i*CELL_SIZE,j*CELL_SIZE))
             
             if data["compboard"][i][j] == "miss":
-                Sprite(miss,(i*CELL_SIZE+90*6,j*CELL_SIZE))
+                Sprite(miss,(i*CELL_SIZE+CELL_SIZE*6,j*CELL_SIZE))
             
             elif data["compboard"][i][j] == "sunk":
-                Sprite(sunk,(i*CELL_SIZE+90*6,j*CELL_SIZE))
+                Sprite(sunk,(i*CELL_SIZE+CELL_SIZE*6,j*CELL_SIZE))
                 
-            if data["board"][i][j] == "sunk":
-                Sprite(RectangleAsset(CELL_SIZE,CELL_SIZE,LineStyle(3,black),red),((cord1)*CELL_SIZE, (cord2)*CELL_SIZE))
-            
-            elif data["board"][i][j] == "miss":
-                Sprite(RectangleAsset(CELL_SIZE,CELL_SIZE,LineStyle(3,black),green),((cord1)*CELL_SIZE, (cord2)*CELL_SIZE))
+            if data["THEIRSUNK"] == shipNum:
+                Sprite((TextAsset("YOU WIN!!", fill=green,style= "bold 75pt Georgia")), (200, 50))
                 
-            if data["THEIRSUNK"] >= 3:
-                Sprite((TextAsset("YOU WIN!!", fill=green,style= "bold 75pt Georgia")), (75, 50))
-                
-            elif data["SUNK"] >= 3:
-                Sprite((TextAsset("YOU LOOOOSSSEEEE!!!!!!", fill=red,style= "bold 75pt Georgia")), (75, 50))
+            if data["SUNK"] == shipNum:
+                Sprite((TextAsset("YOU LOOOOSSSEEEE!!!!!!", fill=red,style= "bold 75pt Georgia")), (10, 50))
                
 
             
@@ -55,29 +53,33 @@ def redrawAll():
 def mouseClick(event):
 
     
-    if data["totalClicks"] < 3:
-        data["board"][event.x//90][event.y//90] = "ship"
-        redrawAll()
+    if data["totalClicks"] < shipNum:
+        if data["compboard"] != "ship":
+            data["board"][event.x//CELL_SIZE][event.y//CELL_SIZE] = "ship"
+            redrawAll()
+            data["totalClicks"] += 1
         
 
-    if data["totalClicks"] >= 3:
-        if data["compboard"] != "sunk" or data["compboard"] != "miss":
-            if data["compboard"][(event.x-(90*6))//90][event.y//90] == "ship":
-                data["compboard"][(event.x-(90*6))//90][event.y//90] = "sunk"
+    if data["totalClicks"] >= shipNum:
+        if data["compboard"] != "sunk" and data["compboard"] != "miss":
+            if data["compboard"][(event.x-(CELL_SIZE*(rowcols+1)))//CELL_SIZE][event.y//CELL_SIZE] == "ship":
+                data["totalClicks"] += 1
+                data["compboard"][(event.x-(CELL_SIZE*(rowcols+1)))//CELL_SIZE][event.y//CELL_SIZE] = "sunk"
                 data["THEIRSUNK"] += 1
             else:
-                data["compboard"][(event.x-(90*6))//90][event.y//90] = "miss"
+                data["compboard"][(event.x-(CELL_SIZE*(rowcols+1)))//CELL_SIZE][event.y//CELL_SIZE] = "miss"
+                data["totalClicks"] += 1
             computerTurn()
+            redrawAll()
             
 
-    data["totalClicks"] += 1        
 
 
 def pickComputerShips():
     i = 0
-    while i < 3:
-        rand1 = randint(0,4)
-        rand2 = randint(0,4)
+    while i < shipNum:
+        rand1 = randint(0,rowcols-1)
+        rand2 = randint(0,rowcols-1)
         if data["compboard"] != "ship":
             data["compboard"][rand1][rand2] = "ship"
             i += 1
@@ -85,18 +87,18 @@ def pickComputerShips():
 
 
 def computerTurn():
-    cord1 = randint(0,4)
-    cord2 = randint(0,4)
+    cord1 = randint(0,rowcols-1)
+    cord2 = randint(0,rowcols-1)
     if data["board"][cord1][cord2] == "miss" or data["board"][cord1][cord2] == "sunk": 
         computerTurn()
     else:
-        if data["board"] == "ship":
+        if data["board"][cord1][cord2] == "ship":
             data["board"][cord1][cord2] = "sunk"
             data["SUNK"] += 1
             
         else:
             data["board"][cord1][cord2] = "miss"
-            data["MISS"] += 1
+            
             
     
     
@@ -107,15 +109,9 @@ if __name__== "__main__":
     data["board"] = buildBoard()
     data["compboard"] = buildBoard()
     data["totalClicks"] = 0
-    data["MISS"] = 0
     data["SUNK"] = 0
     data["THEIRSUNK"] = 0
-    
-    GuessedComp = []
 
-
-    
-    ComputerShips = []
     
    
 
