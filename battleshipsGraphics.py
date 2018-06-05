@@ -24,7 +24,7 @@ def redrawAll():
     for i in range(rowcols):
         for j in range(rowcols):
             Sprite(RectangleAsset(CELL_SIZE,CELL_SIZE,LineStyle(3,black),blue),(i*CELL_SIZE, j*CELL_SIZE))
-            Sprite(RectangleAsset(CELL_SIZE,CELL_SIZE,LineStyle(3,black),blue),(i*CELL_SIZE+CELL_SIZE*6, j*CELL_SIZE))
+            Sprite(RectangleAsset(CELL_SIZE,CELL_SIZE,LineStyle(3,black),blue),(i*CELL_SIZE+CELL_SIZE*(rowcols+1), j*CELL_SIZE))
             
             if data["board"][i][j] == "ship":
                 Sprite(shipbox,(i*CELL_SIZE,j*CELL_SIZE))
@@ -36,10 +36,10 @@ def redrawAll():
                 Sprite(miss,(i*CELL_SIZE,j*CELL_SIZE))
             
             if data["compboard"][i][j] == "miss":
-                Sprite(miss,(i*CELL_SIZE+CELL_SIZE*6,j*CELL_SIZE))
+                Sprite(miss,(i*CELL_SIZE+CELL_SIZE*(rowcols+1),j*CELL_SIZE))
             
             elif data["compboard"][i][j] == "sunk":
-                Sprite(sunk,(i*CELL_SIZE+CELL_SIZE*6,j*CELL_SIZE))
+                Sprite(sunk,(i*CELL_SIZE+CELL_SIZE*(rowcols+1),j*CELL_SIZE))
                 
             if data["THEIRSUNK"] == shipNum:
                 Sprite((TextAsset("YOU WIN!!", fill=green,style= "bold 75pt Georgia")), (200, 50))
