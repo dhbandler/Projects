@@ -45,9 +45,11 @@ def redrawAll(): #handles all of the graphics
                 
             if data["THEIRSUNK"] == shipNum: #ends the game with victory
                 Sprite((TextAsset("YOU WIN!!", fill=green,style= "bold 75pt Georgia")), (200, 50))
+                break
                 
             if data["SUNK"] == shipNum: #ends the game with loss
                 Sprite((TextAsset("YOU LOSE!!!!!!", fill=red,style= "bold 75pt Georgia")), (10, 50))
+                break
                
 
             
@@ -73,8 +75,8 @@ def mouseClick(event): #determines what happens when you click
                 else: #deals with what happens if it is a miss
                     data["compboard"][(event.x-(CELL_SIZE*(rowcols+1)))//CELL_SIZE][event.y//CELL_SIZE] = "miss" #goes and sprites miss
                     data["totalClicks"] += 1
-                computerTurn()
                 redrawAll()
+                computerTurn()
             
 
 
@@ -104,7 +106,7 @@ def computerTurn(): #guesses where our ships are.
             
             else:
                 data["board"][cord1][cord2] = "miss" #lets the computer know that it has less a less effective intelligence agency than Lesotho, and can't find targets
-            
+    redrawAll()        
             
     
     
