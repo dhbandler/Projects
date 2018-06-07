@@ -22,7 +22,7 @@ def redrawAll(): #handles all of the graphics
 
     for item in App().spritelist[:]: #clears graphics
         item.destroy()
-
+    Sprite((TextAsset("BATTLESHIPS", fill=blue,style= "bold 75pt Georgia")), (150, 320))
     for i in range(rowcols): #goes through everything cell by cell
         for j in range(rowcols):
             Sprite(RectangleAsset(CELL_SIZE,CELL_SIZE,LineStyle(3,black),blue),(i*CELL_SIZE, j*CELL_SIZE)) #makes the ocean cells
@@ -44,12 +44,12 @@ def redrawAll(): #handles all of the graphics
                 Sprite(sunk,(i*CELL_SIZE+CELL_SIZE*(rowcols+1),j*CELL_SIZE))
                 
             if data["THEIRSUNK"] == shipNum: #ends the game with victory
-                Sprite((TextAsset("YOU WIN!!", fill=green,style= "bold 75pt Georgia")), (220, 320))
+                Sprite((TextAsset("YOU WIN!!", fill=green,style= "bold 75pt Georgia")), (220, 100))
                 data["gameOver"] = True #ends game
 
                 
             if data["SUNK"] == shipNum: #ends the game with loss
-                Sprite((TextAsset("YOU LOSE!!!!!!", fill=red,style= "bold 75pt Georgia")), (220, 320))
+                Sprite((TextAsset("YOU LOSE!!!!!!", fill=red,style= "bold 75pt Georgia")), (220, 100))
                 data["gameOver"] = True #ends game
 
 
@@ -139,6 +139,7 @@ if __name__== "__main__":
     sunk = RectangleAsset(CELL_SIZE,CELL_SIZE,LineStyle(5,black),red) #creates a red box to signify the fire of a sinking ship
 
 
+    
     pickComputerShips() #picks the computer ships
     
     redrawAll() #runs redrawAll()
