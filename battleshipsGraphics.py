@@ -15,7 +15,7 @@ CELL_SIZE = 200/ROWS+45 #determines cell size
 
 
 def buildBoard(): #builds the matrix used for determinining where ships are and what shots mean
-    return [['a','b','c','d','e'],['f','g','h','i','j'],['k','l','m','n','o'],['p','q','r','s','t'],['u','v','w','x','y']]
+    return [['a','b','c','d','e'],['f','g','h','i','j'],['k','l','m','n','o'],['p','q','r','s','t'],['u','v','w','x','y']] #"Unfortunately, no one can be told what the Matrix is. You have to see it for yourself." -Morpheus
     
 
 def redrawAll(): #handles all of the graphics
