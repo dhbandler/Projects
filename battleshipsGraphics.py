@@ -119,7 +119,7 @@ def computerTurn(): #guesses where our ships are.
 if __name__== "__main__":
     #creates everything I will use
     data = {}
-    data["board"] = buildBoard()
+    data["board"] = buildBoard() #builds board
     data["compboard"] = buildBoard() #this board represents the computer's board
     data["totalClicks"] = 0 #counts total mouse clicks
     data["SUNK"] = 0 #counts how many ships we have lost
