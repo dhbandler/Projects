@@ -23,7 +23,7 @@ def redrawAll(): #handles all of the graphics
 
     for item in App().spritelist[:]: #clears graphics
         item.destroy()
-    Sprite((TextAsset("BATTLESHIPS", fill=blue,style= "bold 75pt Georgia")), (150, 320))
+    Sprite((TextAsset("BATTLESHIPS", fill=red,style= "bold 75pt Georgia")), (150, 410))
     for i in range(rowcols): #goes through everything cell by cell
         for j in range(rowcols):
             Sprite(RectangleAsset(CELL_SIZE,CELL_SIZE,LineStyle(3,black),blue),(i*CELL_SIZE, j*CELL_SIZE)) #makes the ocean cells
