@@ -23,7 +23,7 @@ def redrawAll(): #handles all of the graphics
 
     for item in App().spritelist[:]: #clears graphics
         item.destroy()
-    Sprite((TextAsset("BATTLESHIPS", fill=red,style= "bold 75pt Georgia")), (150, 410))
+    Sprite((TextAsset("BATTLESHIPS", fill=red2,style= "bold 75pt Georgia")), (150, 410))
     for i in range(rowcols): #goes through everything cell by cell
         for j in range(rowcols):
             Sprite(RectangleAsset(CELL_SIZE,CELL_SIZE,LineStyle(3,black),blue),(i*CELL_SIZE, j*CELL_SIZE)) #makes the ocean cells
@@ -45,12 +45,12 @@ def redrawAll(): #handles all of the graphics
                 Sprite(sunk,(i*CELL_SIZE+CELL_SIZE*(rowcols+1),j*CELL_SIZE))
                 
             if data["THEIRSUNK"] == shipNum: #ends the game with victory
-                Sprite((TextAsset("YOU WIN!!", fill=green,style= "bold 75pt Georgia")), (220, 100))
+                Sprite((TextAsset("YOU WIN!!", fill=green2,style= "bold 75pt Georgia")), (220, 100))
                 data["gameOver"] = True #ends game
 
                 
             if data["SUNK"] == shipNum: #ends the game with loss
-                Sprite((TextAsset("YOU LOSE!!!!!!", fill=red,style= "bold 75pt Georgia")), (220, 100))
+                Sprite((TextAsset("YOU LOSE!!!!!!", fill=red2,style= "bold 75pt Georgia")), (220, 100))
                 data["gameOver"] = True #ends game
 
 
@@ -133,7 +133,9 @@ if __name__== "__main__":
     chrome = Color(0xdbe4eb,1)
     black = Color(0x000000,1)
     green = Color(0x008000,.5)
+    green2 = Color(0x008000,1)
     red = Color(0xFF0000,.5)
+    red2 = Color(0xFF0000,1)
 
     shipbox = RectangleAsset(CELL_SIZE,CELL_SIZE,LineStyle(3,black),chrome) #creates a chrome box which our graphic designers claim looks like a ship, however I don't see it
     miss = RectangleAsset(CELL_SIZE,CELL_SIZE,LineStyle(5,black),green) #creates a green box which represents a miss because misses obviously turn the ocean green
